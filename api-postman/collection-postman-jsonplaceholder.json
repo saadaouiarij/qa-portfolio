@@ -1,0 +1,256 @@
+{
+  "info": {
+    "name": "QA Portfolio - Tests API JSONPlaceholder",
+    "description": "Collection de tests d'API REST (GET, POST, PUT, DELETE) sur l'API publique JSONPlaceholder.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://jsonplaceholder.typicode.com"
+    }
+  ],
+  "item": [
+    {
+      "name": "TC-API-01 - GET liste des posts",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Statut 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"La reponse est un tableau\", () => pm.expect(pm.response.json()).to.be.an(\"array\"));",
+              "pm.test(\"100 posts retournes\", () => pm.expect(pm.response.json().length).to.eql(100));",
+              "pm.test(\"Temps de reponse < 1500 ms\", () => pm.expect(pm.response.responseTime).to.be.below(1500));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/posts",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TC-API-02 - GET un post existant",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Statut 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Content-Type JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const post = pm.response.json();",
+              "pm.test(\"Champs obligatoires presents\", () => { pm.expect(post).to.have.all.keys(\"userId\",\"id\",\"title\",\"body\"); });",
+              "pm.test(\"L'id vaut 1\", () => pm.expect(post.id).to.eql(1));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/posts/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TC-API-03 - GET un post inexistant (404 attendu)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Statut 404 pour un id inexistant\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/posts/999999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts",
+            "999999"
+          ]
+        }
+      }
+    },
+    {
+      "name": "TC-API-04 - GET posts filtres par userId",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Statut 200\", () => pm.response.to.have.status(200));",
+              "const posts = pm.response.json();",
+              "pm.test(\"10 posts pour userId=1\", () => pm.expect(posts.length).to.eql(10));",
+              "pm.test(\"Tous les posts appartiennent a userId 1\", () => posts.forEach(p => pm.expect(p.userId).to.eql(1)));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/posts?userId=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "TC-API-05 - POST creation d'un post",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Statut 201 (cree)\", () => pm.response.to.have.status(201));",
+              "const created = pm.response.json();",
+              "pm.test(\"Un id est genere\", () => pm.expect(created).to.have.property(\"id\"));",
+              "pm.test(\"Le titre envoye est retourne\", () => pm.expect(created.title).to.eql(\"Facture de test\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/posts",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Facture de test\",\n  \"body\": \"Creation d'une facture via API\",\n  \"userId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "TC-API-06 - PUT mise a jour d'un post",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Statut 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Le titre est mis a jour\", () => pm.expect(pm.response.json().title).to.eql(\"Facture modifiee\"));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/posts/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts",
+            "1"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 1,\n  \"title\": \"Facture modifiee\",\n  \"body\": \"Mise a jour du contenu\",\n  \"userId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "TC-API-07 - DELETE suppression d'un post",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Statut 200\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/posts/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "posts",
+            "1"
+          ]
+        }
+      }
+    }
+  ]
+}
