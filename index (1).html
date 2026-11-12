@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arij Saadaoui – Portfolio QA</title>
+<style>
+:root{
+  --bg:#f7f8fa; --surface:#ffffff; --text:#1b2330; --muted:#5b6575; --border:#e2e6ec;
+  --accent:#0f6b5c; --accent-soft:#e3f3ef; --on-accent:#ffffff;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10151c; --surface:#18202a; --text:#e8ecf2; --muted:#9aa5b5; --border:#2a3441;
+    --accent:#4fc3a8; --accent-soft:#17302c; --on-accent:#0b1512;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10151c; --surface:#18202a; --text:#e8ecf2; --muted:#9aa5b5; --border:#2a3441;
+  --accent:#4fc3a8; --accent-soft:#17302c; --on-accent:#0b1512;
+  color-scheme: dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--border);z-index:5}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
+.nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-size:.92rem}
+.nav a:hover{color:var(--accent)}
+.brand{font-weight:700;color:var(--text)!important;margin:0!important}
+.hero{padding:64px 0 40px}
+.tag{display:inline-block;background:var(--accent-soft);color:var(--accent);padding:4px 12px;border-radius:99px;font-size:.85rem;font-weight:600}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.15;margin:16px 0 12px}
+.lead{color:var(--muted);font-size:1.1rem;max-width:640px}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.btn{display:inline-block;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600;border:1px solid var(--accent)}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.ghost{color:var(--accent)}
+section{padding:36px 0}
+h2{font-size:1.5rem;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;flex-direction:column}
+.card h3{margin:0 0 6px;font-size:1.1rem}
+.card p{margin:0 0 12px;color:var(--muted);font-size:.95rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:0;list-style:none}
+.chips li{background:var(--accent-soft);color:var(--accent);font-size:.78rem;padding:2px 9px;border-radius:99px;font-weight:600}
+.card a{margin-top:auto;color:var(--accent);font-weight:600;text-decoration:none}
+.card a:hover{text-decoration:underline}
+.note{background:var(--accent-soft);border-left:4px solid var(--accent);padding:12px 16px;border-radius:6px;font-size:.92rem;margin-top:20px}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.skills div{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px}
+.skills h3{margin:0 0 8px;font-size:1rem}
+.skills p{margin:0;color:var(--muted);font-size:.92rem}
+footer{border-top:1px solid var(--border);padding:32px 0;margin-top:24px;color:var(--muted);font-size:.92rem}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#top">Arij Saadaoui</a>
+  <nav><a href="#projets">Projets</a><a href="#competences">Compétences</a><a href="#contact">Contact</a></nav>
+</div></header>
+
+<main id="top">
+<div class="wrap">
+  <div class="hero">
+    <span class="tag">Ingénieure QA fonctionnelle</span>
+    <h1>Des tests rigoureux pour des applications de gestion fiables.</h1>
+    <p class="lead">Ingénieure en génie logiciel, 2 ans d’expérience en recette fonctionnelle, tests de non-régression, tests d’API et contrôles de données SQL sur une application de gestion fiscale. Je développe mes compétences en automatisation (Playwright, Selenium).</p>
+    <div class="btns">
+      <a class="btn primary" href="#projets">Voir mes projets</a>
+      <a class="btn ghost" href="https://github.com/saadaouiarij/qa-portfolio">Dépôt GitHub</a>
+    </div>
+  </div>
+
+  <section id="projets">
+    <h2>Projets</h2>
+    <p class="sub">Cinq réalisations qui couvrent le cycle de tests, de l’analyse à l’automatisation.</p>
+    <div class="grid">
+      <article class="card">
+        <h3>Plan de tests fonctionnels</h3>
+        <p>Plan de tests complet (objectif, périmètre, environnement, critères d’entrée et de sortie) et 20 cas de tests sur l’application SauceDemo, avec priorités et exécution documentée.</p>
+        <ul class="chips"><li>Plan de tests</li><li>Cas de tests</li><li>Non-régression</li></ul>
+        <a href="https://github.com/saadaouiarij/qa-portfolio/tree/main/plan-de-tests">Voir le plan →</a>
+      </article>
+      <article class="card">
+        <h3>Rapports d’anomalies</h3>
+        <p>Exemples de tickets de bugs rédigés dans Jira : étapes de reproduction, résultat attendu et obtenu, impact, priorité. Cas fictifs sur une application de facturation de démonstration.</p>
+        <ul class="chips"><li>Jira</li><li>Bug reports</li><li>Priorisation</li></ul>
+        <a href="https://github.com/saadaouiarij/qa-portfolio/tree/main/anomalies">Voir les anomalies →</a>
+      </article>
+      <article class="card">
+        <h3>Tests d’API avec Postman</h3>
+        <p>Collection de 7 requêtes REST (GET, POST, PUT, DELETE) avec 18 vérifications automatiques : codes de statut, structure JSON, valeurs, temps de réponse.</p>
+        <ul class="chips"><li>Postman</li><li>REST / JSON</li><li>Collection Runner</li></ul>
+        <a href="https://github.com/saadaouiarij/qa-portfolio/tree/main/api-postman">Voir la collection →</a>
+      </article>
+      <article class="card">
+        <h3>Automatisation avec Playwright</h3>
+        <p>12 scénarios de non-régression automatisés (connexion, catalogue, panier, commande), exécutés sur Chromium, Firefox et WebKit. Retour d’expérience sur la correction de deux tests instables.</p>
+        <ul class="chips"><li>Playwright</li><li>JavaScript</li><li>Multi-navigateurs</li></ul>
+        <a href="https://github.com/saadaouiarij/qa-portfolio/tree/main/automatisation">Voir les tests →</a>
+      </article>
+      <article class="card">
+        <h3>Contrôles de données SQL</h3>
+        <p>Sept requêtes de contrôle entre facturation et comptabilité : factures sans écriture, écarts de montant, doublons, écritures orphelines, erreurs de calcul de TVA, incohérences de dates.</p>
+        <ul class="chips"><li>SQL</li><li>Rapprochement</li><li>Facturation</li></ul>
+        <a href="https://github.com/saadaouiarij/qa-portfolio/tree/main/sql">Voir les requêtes →</a>
+      </article>
+    </div>
+    <p class="note">Les projets de ce portfolio utilisent des applications publiques d’entraînement ou des données fictives. Aucune donnée ni capture d’écran de clients n’y figure.</p>
+  </section>
+
+  <section id="competences">
+    <h2>Compétences</h2>
+    <p class="sub">Ce que je pratique au quotidien et ce que je développe.</p>
+    <div class="skills">
+      <div><h3>Tests fonctionnels</h3><p>Analyse des spécifications, plans de tests, cas de tests, jeux de données, recette, non-régression, tests d’intégration.</p></div>
+      <div><h3>Données et API</h3><p>SQL (Oracle, PostgreSQL, MySQL), contrôle des flux de données, tests d’API REST avec Postman, analyse de logs.</p></div>
+      <div><h3>Automatisation</h3><p>Playwright, Selenium, TestNG, JUnit, Cucumber. Identification des scénarios automatisables. En progression.</p></div>
+      <div><h3>Méthodes et outils</h3><p>Agile, Scrum, Jira, Git, GitHub. Certification ISTQB Foundation en préparation.</p></div>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer id="contact"><div class="wrap">
+  <h2>Contact</h2>
+  <p>Tunis, Tunisie · <a href="mailto:saadaouiarij4@gmail.com">saadaouiarij4@gmail.com</a> · <a href="https://www.linkedin.com/in/saadaoui-arij">LinkedIn</a> · <a href="https://github.com/saadaouiarij/qa-portfolio">GitHub</a></p>
+</div></footer>
+</body>
+</html>
